@@ -3,17 +3,10 @@ import Home from './pages/Home';
 import Navbar from './pages/Navbar';
 import Login from './pages/Login';
 import CreatePost from './pages/CreatePost';
-
+import { UserConsumer } from './context/userContext.jsx';
 const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='home' element={<Home />} />
-        <Route path='createPost' element={<CreatePost />} />
-      </Routes>
-    </Router>
-  );
+  const { isAuth } = UserConsumer();
+  return <>{isAuth ? <Home /> : <Login />}</>;
 };
 
 export default App;

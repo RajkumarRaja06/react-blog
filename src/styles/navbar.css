@@ -26,3 +26,19 @@
 .navbar button:hover {
   background-color: red;
 }
+
+.navbar_addBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar_addBtn span {
+  font-size: 1.75rem;
+  cursor: pointer;
+}
+
+.navbar_addBtn span:hover {
+  color: #ea1d6f;
+}

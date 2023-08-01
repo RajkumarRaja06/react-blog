@@ -1,5 +1,14 @@
+.home {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
 .homeHeader {
-  width: 100vw;
   min-height: 30vh;
   display: flex;
   flex-direction: column;

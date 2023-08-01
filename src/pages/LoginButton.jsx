@@ -10,7 +10,7 @@ const LoginButton = () => {
     signInWithPopup(auth, googleProvider).then((result) => {
       localStorage.setItem('isAuth', true);
       setIsAuth(true);
-      navigate('home');
+      navigate('/');
     });
   };
   return (

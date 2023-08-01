@@ -6,7 +6,7 @@ const UserProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
 
   return (
-    <UserContext.Provider value={{ setIsAuth }}>
+    <UserContext.Provider value={{ setIsAuth, isAuth }}>
       {children}
     </UserContext.Provider>
   );
