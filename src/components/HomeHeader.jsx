@@ -1,6 +1,8 @@
 import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri';
+import { UserConsumerCreatePost } from '../context/createPostContext';
 
 const HomeHeader = () => {
+  const { searchItem } = UserConsumerCreatePost();
   return (
     <div className='homeHeader'>
       <div className='homeHeader_title'>
@@ -21,7 +23,11 @@ const HomeHeader = () => {
         </p>
       </div>
       <div className='search-bar'>
-        <input type='search' placeholder='Search By Category' />
+        <input
+          type='search'
+          placeholder='Search By Category'
+          onChange={(event) => searchItem(event.target.value)}
+        />
       </div>
     </div>
   );

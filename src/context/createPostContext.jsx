@@ -8,11 +8,23 @@ const UserProviderCreatePost = ({ children }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [editingObj, setEditingObj] = useState(null);
   const [mainBlogObj, setMainBlogObj] = useState(null);
+  const [searchItems, setSearchItems] = useState([]);
+
+  const searchItem = (inputValue) => {
+    const searchInput = inputValue.toLowerCase();
+
+    if (list.length) {
+      setSearchItems(
+        list.filter((item) => {
+          return item.category.toLowerCase().includes(searchInput);
+        })
+      );
+    }
+    setList(searchItems);
+  };
 
   const showMainBlog = (id) => {
     const getMainBlogObj = list.filter((item) => item.id === id);
-    console.log(list);
-    console.log(getMainBlogObj[0]);
     setMainBlogObj(getMainBlogObj);
   };
 
@@ -53,6 +65,7 @@ const UserProviderCreatePost = ({ children }) => {
         setEditingObj,
         mainBlogObj,
         showMainBlog,
+        searchItem,
       }}
     >
       {children}
