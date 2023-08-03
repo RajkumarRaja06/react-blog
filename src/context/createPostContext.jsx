@@ -1,7 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-
 const UserContextCreatePost = createContext();
-
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -39,7 +37,6 @@ const UserProviderCreatePost = ({ children }) => {
       const data = await getDocs(userCollectionRef);
       setList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
-
     getUserInput();
   }, []);
 

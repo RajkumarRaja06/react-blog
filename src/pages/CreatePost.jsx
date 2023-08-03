@@ -1,5 +1,4 @@
 import '../styles/createPost.css';
-import { v4 as uuidv4 } from 'uuid';
 import { useState, useEffect } from 'react';
 import {
   addDoc,

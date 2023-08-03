@@ -1,7 +1,5 @@
 import { SingleBlog, HomeHeader } from '../components';
 import '../styles/home.css';
-import { useState, useEffect } from 'react';
-
 import { UserConsumerCreatePost } from '../context/createPostContext';
 
 const Home = () => {

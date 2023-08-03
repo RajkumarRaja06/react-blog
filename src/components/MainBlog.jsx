@@ -1,6 +1,4 @@
-import img from '../../public/assets/img.png';
 import '../styles/blog.css';
-
 import { UserConsumerCreatePost } from '../context/createPostContext';
 
 const MainBlog = () => {
