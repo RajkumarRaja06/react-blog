@@ -6,7 +6,7 @@ import CreatePost from './pages/CreatePost';
 import { UserConsumer } from './context/userContext.jsx';
 const App = () => {
   const { isAuth } = UserConsumer();
-  return <>{isAuth ? <Home /> : <Login />}</>;
+  return <main>{isAuth ? <Home /> : <Login />}</main>;
 };
 
 export default App;

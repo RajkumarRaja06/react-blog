@@ -1,37 +1,19 @@
-import HomeHeader from '../components/HomeHeader';
+import { SingleBlog, HomeHeader } from '../components';
 import '../styles/home.css';
-import SingleBlog from '../components/SingleBlog';
 import { useState, useEffect } from 'react';
-import {
-  getDoc,
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-} from 'firebase/firestore';
-import { db } from '../firebase';
+
+import { UserConsumerCreatePost } from '../context/createPostContext';
 
 const Home = () => {
-  const [list, setList] = useState([]);
-
-  const userCollectionRef = collection(db, 'userInput');
-  useEffect(() => {
-    const queryCollection = query(
-      userCollectionRef,
-      orderBy('created', 'desc')
-    );
-    // dout
-    onSnapshot(queryCollection, (querySnapSort) => {
-      console.log(querySnapSort);
-    });
-  }, []);
+  const { list } = UserConsumerCreatePost();
 
   return (
     <div className='home'>
       <HomeHeader />
       <div className='singleBlog-container'>
-        <SingleBlog />
-        <SingleBlog />
+        {list.map((item, index) => (
+          <SingleBlog item={item} key={index} />
+        ))}
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ const Navbar = () => {
       <nav className='navbar'>
         <h3>Blog</h3>
         <div className='navbar_addBtn'>
-          <Link to='createPage'>
+          <Link to='createPost'>
             <span>
               <FaRegPlusSquare />
             </span>

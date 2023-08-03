@@ -1,25 +1,30 @@
-import img from '../../public/assets/img.png';
 import { TbEdit } from 'react-icons/tb';
 import { RiDeleteBin2Line } from 'react-icons/ri';
-import '../styles/singleBlog.css';
+import '../styles/blog.css';
+import { Link } from 'react-router-dom';
+import { UserConsumerCreatePost } from '../context/createPostContext';
 
-const SingleBlog = () => {
+const SingleBlog = ({ item }) => {
+  const { deleteItem, editItem, showMainBlog } = UserConsumerCreatePost();
+  const { name, image, category, description, id } = item;
   return (
-    <div className='singleBlog'>
-      <img src={img} alt='Image' />
-      <h5 className='singleBlog-name'>Food Blog</h5>
-      <p className='singleBlog-para'>
-        The first thing to do, when working with list and selector in the same
-        file, is the list itself. Here we call the items on the list for
-        images.........{' '}
-        <button className='singleBlog-readBtn'>Read more</button>
-      </p>
-      <h2 className='singleBlog-category'>FOOD</h2>
-      <div className='singleBlogBtn'>
-        <button className='singleBlog-editBtn'>
-          <TbEdit />
+    <div className='singleBlog' key={id}>
+      <img src={image} alt={name} />
+      <h5 className='singleBlog-name'>{name}</h5>
+      <div>
+        <p className='singleBlog-para'>{description}</p>
+        <button className='singleBlog-readBtn' onClick={() => showMainBlog(id)}>
+          <Link to='mainBlog'>Read more</Link>
         </button>
-        <button className='singleBlog-deleteBtn'>
+      </div>
+      <h2 className='singleBlog-category'>{category}</h2>
+      <div className='singleBlogBtn'>
+        <button className='singleBlog-editBtn' onClick={() => editItem(id)}>
+          <Link to='createPost'>
+            <TbEdit />
+          </Link>
+        </button>
+        <button className='singleBlog-deleteBtn' onClick={() => deleteItem(id)}>
           <RiDeleteBin2Line />
         </button>
       </div>
