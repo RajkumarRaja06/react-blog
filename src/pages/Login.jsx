@@ -1,6 +1,7 @@
 import book from '../../public/assets/book.svg';
 import '../styles/login.css';
 import LoginButton from './LoginButton';
+import { Link } from 'react-router-dom';
 
 const LogIn = () => {
   return (
@@ -12,6 +13,10 @@ const LogIn = () => {
           we providing high quality online resources reding blogs. Just sign up
           and start reading some quality blogs.
         </p>
+        <Link to='emailSignin'>
+          <button className='login-btn'>SignIn width Email</button>
+        </Link>
+
         <LoginButton />
       </div>
     </div>

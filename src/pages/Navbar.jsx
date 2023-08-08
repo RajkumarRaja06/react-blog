@@ -7,11 +7,11 @@ import { FaRegPlusSquare } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const { setIsAuth } = UserConsumer();
+  const { setUserLoginData } = UserConsumer();
   const navigation = useNavigate();
   const signOutGoogle = () => {
     signOut(auth);
-    setIsAuth(false);
+    setUserLoginData(null);
     localStorage.clear();
     navigation('/');
   };

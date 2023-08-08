@@ -12,20 +12,20 @@ import { useNavigate } from 'react-router-dom';
 import { UserConsumerCreatePost } from '../context/createPostContext';
 
 const CreatePost = () => {
-  const { isEdit, setIsEdit, editingObj, setEditingObj } =
-    UserConsumerCreatePost();
+  const {
+    isEdit,
+    setIsEdit,
+    editingObj,
+    setEditingObj,
+    uploadImage,
+    newImage,
+    setNewImage,
+  } = UserConsumerCreatePost();
 
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
-  const [newImage, setNewImage] = useState('');
-  const [newCategory, setNewCategory] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
 
-  useEffect(() => {
-    if (newImage) {
-      setImageUrl(URL.createObjectURL(newImage));
-    }
-  }, [newImage]);
+  const [newCategory, setNewCategory] = useState('');
 
   function submitHandler() {
     setNewName('');
@@ -43,7 +43,7 @@ const CreatePost = () => {
           id: auth.currentUser.uid,
           name: newName,
           description: newDescription,
-          image: imageUrl,
+          image: newImage,
           category: newCategory,
           time: Timestamp.now(),
         });
@@ -96,11 +96,10 @@ const CreatePost = () => {
               type='file'
               name='image'
               accept='image/*'
-              onChange={(event) => setNewImage(event.target.files[0])}
+              onChange={(event) => uploadImage(event)}
             />
           </div>
         )}
-
         <input
           type='text'
           name='category'

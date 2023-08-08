@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 const UserContextCreatePost = createContext();
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { db, storage } from '../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const UserProviderCreatePost = ({ children }) => {
   const [list, setList] = useState([]);
@@ -9,6 +10,8 @@ const UserProviderCreatePost = ({ children }) => {
   const [editingObj, setEditingObj] = useState(null);
   const [mainBlogObj, setMainBlogObj] = useState(null);
   const [searchItems, setSearchItems] = useState([]);
+
+  const [newImage, setNewImage] = useState('');
 
   const searchItem = (inputValue) => {
     const searchInput = inputValue.toLowerCase();
@@ -30,8 +33,11 @@ const UserProviderCreatePost = ({ children }) => {
 
   const deleteItem = async (id) => {
     try {
-      const itemToEditRef = doc(db, 'userInput', id);
-      await deleteDoc(itemToEditRef);
+      const itemToDeleteRef = doc(db, 'userInput', id);
+      await deleteDoc(itemToDeleteRef);
+
+      const deletedArray = list.filter((item) => item.id !== id);
+      setList(deletedArray);
     } catch (error) {
       console.log(error);
     }
@@ -52,6 +58,39 @@ const UserProviderCreatePost = ({ children }) => {
     getUserInput();
   }, []);
 
+  const uploadImage = (event) => {
+    const imageFile = event.target.files[0];
+
+    const storageRef = ref(storage, `Images/${Date.now()}/${imageFile.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+        }
+      },
+      (error) => {
+        console.log('Error', error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          console.log('File available at', downloadURL);
+          setNewImage(downloadURL);
+        });
+      }
+    );
+  };
+
   return (
     <UserContextCreatePost.Provider
       value={{
@@ -66,6 +105,9 @@ const UserProviderCreatePost = ({ children }) => {
         mainBlogObj,
         showMainBlog,
         searchItem,
+        uploadImage,
+        newImage,
+        setNewImage,
       }}
     >
       {children}

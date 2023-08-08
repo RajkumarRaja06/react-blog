@@ -4,12 +4,15 @@ import { UserConsumer } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 
 const LoginButton = () => {
-  const { setIsAuth } = UserConsumer();
+  const { setUserLoginData } = UserConsumer();
   const navigate = useNavigate();
   const signInWithGoogle = () => {
-    signInWithPopup(auth, googleProvider).then((result) => {
-      localStorage.setItem('isAuth', true);
-      setIsAuth(true);
+    signInWithPopup(auth, googleProvider).then((userCredential) => {
+      const user = userCredential.user;
+
+      const { providerData } = user;
+      localStorage.setItem('user', JSON.stringify(providerData[0]));
+      setUserLoginData(JSON.parse(localStorage.getItem('user')));
       navigate('/');
     });
   };

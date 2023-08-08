@@ -4,10 +4,10 @@ import { UserConsumer } from '../context/userContext';
 import LoginPageNavbar from './LoginPageNavbar';
 
 const Root = () => {
-  const { isAuth } = UserConsumer();
+  const { userLoginData } = UserConsumer();
   return (
     <div>
-      {isAuth ? <Navbar /> : <LoginPageNavbar />}
+      {userLoginData ? <Navbar /> : <LoginPageNavbar />}
       <Outlet />
     </div>
   );

@@ -7,6 +7,8 @@ import { UserProvider } from './context/userContext.jsx';
 import App from './App';
 import CreatePost from './pages/CreatePost';
 import Root from './pages/root';
+import EmailLogin from './pages/EmailLogin';
+import EmailSignin from './pages/EmailSignin';
 import { MainBlog } from './components';
 
 const router = createBrowserRouter([
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: 'mainBlog',
         element: <MainBlog />,
+      },
+      {
+        path: 'emailLogin',
+        element: <EmailLogin />,
+      },
+      {
+        path: 'emailSignin',
+        element: <EmailSignin />,
       },
     ],
   },

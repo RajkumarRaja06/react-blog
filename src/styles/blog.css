@@ -131,6 +131,7 @@
 .mainBlog-name {
   font-weight: 800;
   font-size: 1rem;
+  text-transform: uppercase;
 }
 
 .mainBlog-para {
