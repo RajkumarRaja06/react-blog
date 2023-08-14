@@ -53,7 +53,7 @@ const EmailLogin = () => {
           type='password'
           name='password'
           className='contact-form-message'
-          placeholder='Enter New Password'
+          placeholder='Enter your password'
           required
           value={password}
           onChange={(event) => setPassword(event.target.value)}
@@ -70,7 +70,7 @@ const EmailLogin = () => {
         <div className='already-acc'>
           Not account yet ?{'   '}
           <span className='already-acc-log'>
-            <NavLink to='/emailSignin'>Sign up</NavLink>
+            <NavLink to='/emailSignin'>Sign Up</NavLink>
           </span>
         </div>
       </form>

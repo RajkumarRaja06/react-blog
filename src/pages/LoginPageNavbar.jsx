@@ -5,7 +5,7 @@ const LoginPageNavbar = () => {
     <nav className='loginPage-navbar'>
       <h3>Blog</h3>
       <h6>
-        <Link to='/'>User Not Available😔</Link>
+        <Link to='/'>User not available😔</Link>
       </h6>
     </nav>
   );

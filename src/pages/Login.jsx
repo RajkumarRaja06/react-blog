@@ -14,7 +14,9 @@ const LogIn = () => {
           and start reading some quality blogs.
         </p>
         <Link to='emailSignin'>
-          <button className='login-btn'>SignIn width Email</button>
+          <button className='login-btn'>
+            SignIn with <span>Email</span>
+          </button>
         </Link>
 
         <LoginButton />

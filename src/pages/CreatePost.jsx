@@ -1,15 +1,13 @@
 import '../styles/createPost.css';
 import { useState, useEffect } from 'react';
-import {
-  addDoc,
-  collection,
-  Timestamp,
-  doc,
-  updateDoc,
-} from 'firebase/firestore';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { UserConsumerCreatePost } from '../context/createPostContext';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
+import { getUserInput } from '../utils/firebaseFunction';
 
 const CreatePost = () => {
   const {
@@ -20,11 +18,11 @@ const CreatePost = () => {
     uploadImage,
     newImage,
     setNewImage,
+    dispatch,
   } = UserConsumerCreatePost();
 
   const [newName, setNewName] = useState('');
   const [newDescription, setNewDescription] = useState('');
-
   const [newCategory, setNewCategory] = useState('');
 
   function submitHandler() {
@@ -34,46 +32,78 @@ const CreatePost = () => {
     setNewCategory('');
   }
 
+  const date = () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    let mm = today.getMonth() + 1;
+    let dd = today.getDate();
+
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+
+    const formattedToday = dd + '/' + mm + '/' + yyyy;
+    return formattedToday;
+  };
+
+  date();
+
+  const fetchData = async () => {
+    await getUserInput().then((data) => {
+      dispatch({ type: 'GET_DATA', blogData: data });
+    });
+  };
+
   const navigate = useNavigate();
   const userCollectionRef = collection(db, 'userInput');
   const createPost = async () => {
-    if (!isEdit) {
-      try {
-        await addDoc(userCollectionRef, {
-          id: auth.currentUser.uid,
-          name: newName,
-          description: newDescription,
-          image: newImage,
-          category: newCategory,
-          time: Timestamp.now(),
-        });
-      } catch (error) {
-        console.log(error);
+    if ((newName && newDescription && newCategory) || newImage) {
+      if (!isEdit) {
+        try {
+          await addDoc(userCollectionRef, {
+            id: auth.currentUser.uid,
+            name: newName,
+            description: newDescription,
+            image: newImage,
+            category: newCategory,
+            time: date(),
+          });
+        } catch (error) {
+          console.log(error);
+        }
+        navigate('/');
+        toast.success('Successfully Blog Updated!');
+      } else {
+        try {
+          const itemToEditRef = doc(db, 'userInput', editingObj.id);
+          await updateDoc(itemToEditRef, {
+            id: itemToEditRef.id,
+            name: newName,
+            description: newDescription,
+            image: editingObj.image,
+            category: newCategory,
+            time: editingObj.time,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+        setIsEdit(false);
+        setEditingObj(null);
+        navigate('/');
+        toast.success('Successfully Blog Added!');
       }
     } else {
-      try {
-        const itemToEditRef = doc(db, 'userInput', editingObj[0].id);
-        await updateDoc(itemToEditRef, {
-          id: itemToEditRef.id,
-          name: newName,
-          description: newDescription,
-          image: editingObj[0].image,
-          category: newCategory,
-          time: editingObj[0].time,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-      setIsEdit(false);
-      setEditingObj(null);
+      alert('Input Field Is Mandatory');
+      toast.error('Input Field Is Mandatory!');
     }
     submitHandler();
-    navigate('/');
+    fetchData();
   };
 
   return (
     <div className='createPost'>
-      <h1 className='createPost-title'>Add Blog</h1>
+      <h1 className='createPost-title'>
+        {isEdit ? 'Update Blog' : 'Add Blog'}
+      </h1>
       <div className='createPost-form'>
         <input
           type='text'
@@ -81,6 +111,7 @@ const CreatePost = () => {
           placeholder='Blog name'
           value={newName}
           onChange={(event) => setNewName(event.target.value)}
+          required
         />
         <textarea
           name='description'
@@ -89,6 +120,7 @@ const CreatePost = () => {
           placeholder='Description'
           value={newDescription}
           onChange={(event) => setNewDescription(event.target.value)}
+          required
         ></textarea>
         {isEdit ? null : (
           <div className='createPost-form-img'>
@@ -97,6 +129,7 @@ const CreatePost = () => {
               name='image'
               accept='image/*'
               onChange={(event) => uploadImage(event)}
+              required
             />
           </div>
         )}
@@ -106,6 +139,7 @@ const CreatePost = () => {
           placeholder='Category'
           value={newCategory}
           onChange={(event) => setNewCategory(event.target.value)}
+          required
         />
         <div className='createPostBtn'>
           <input
@@ -114,9 +148,11 @@ const CreatePost = () => {
             className='createPost-addBtn'
             onClick={(event) => createPost(event.target.value)}
           />
+
           <input type='submit' value='Cancel' onClick={submitHandler} />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

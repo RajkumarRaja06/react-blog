@@ -1,25 +1,30 @@
 .navbar {
-  height: 4rem;
-  background-color: #000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 5rem;
   color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 0.75rem;
+  z-index: 100;
+  background: linear-gradient(45deg, #f6463d 0%, #f6398d 45%, #f52cdc 100%);
 }
 
 .navbar h3 {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  color: #fff;
 }
 
 .navbar button {
   padding: 0.5rem 1rem;
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 700;
   background-color: #fff;
   color: #000;
   border: none;
-  border-radius: 1rem 3rem;
+  border-radius: 1rem;
   cursor: pointer;
 }
 
@@ -41,4 +46,17 @@
 
 .navbar_addBtn span:hover {
   color: #ea1d6f;
+}
+
+@media screen and (min-width: 768px) {
+  .navbar {
+    padding: 0 3.75rem;
+  }
+  .navbar h3 {
+    font-size: 1.75rem;
+  }
+  .navbar button {
+    font-size: 1rem;
+    border-radius: 1rem 4em;
+  }
 }

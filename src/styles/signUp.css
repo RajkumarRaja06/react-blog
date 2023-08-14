@@ -1,6 +1,5 @@
 .contact {
-  max-width: 63rem;
-  min-height: 80vh;
+  height: 88.7vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,8 +7,8 @@
   justify-content: space-evenly;
   overflow: hidden;
   padding: 0 1rem;
-  margin-top: 7rem;
-  margin: auto;
+  margin-top: 5rem;
+  background-color: #020617;
 }
 
 .title-container {
@@ -17,13 +16,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto;
 }
 
 .title-name {
   font-size: 2rem;
   font-weight: 500;
-  color: #242329;
+  color: #fff;
+  margin: 0.75rem auto;
 }
 
 .title-subtitle {
@@ -42,7 +41,9 @@
   justify-content: center;
   gap: 2rem;
   border: 1px solid #e0e0e0;
-  padding: 4rem 4rem 1rem;
+  padding: 6rem 3rem 1rem;
+  background-color: #fff;
+  border-radius: 0.75rem;
 }
 
 .contact-form-name,

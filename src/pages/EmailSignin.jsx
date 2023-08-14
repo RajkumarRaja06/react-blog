@@ -28,16 +28,16 @@ const EmailSignin = () => {
       });
   };
   return (
-    <div className='contact' id='contact'>
+    <div className='contact'>
       <div className='title-container'>
-        <h2 className='title-name'>Sign in</h2>
-        <span className='title-subtitle'>Create a Shop Account !</span>
+        <h2 className='title-name'>Sign In</h2>
+        <span className='title-subtitle'>Create a Blog Account !</span>
       </div>
       <form className='contact-form' onSubmit={onSubmit}>
         <input
           type='email'
           name='email'
-          placeholder='Enter a valid email address'
+          placeholder='Enter a New Email Address...'
           className='contact-form-email'
           required
           value={email}
@@ -48,7 +48,7 @@ const EmailSignin = () => {
           type='password'
           name='password'
           className='contact-form-message'
-          placeholder='Enter New Password'
+          placeholder='Enter New Password...'
           required
           value={password}
           onChange={(event) => setPassword(event.target.value)}
@@ -66,7 +66,7 @@ const EmailSignin = () => {
         <div className='already-acc'>
           Already have an account ?{'   '}
           <span className='already-acc-log'>
-            <NavLink to='/emailLogin'>Sign in</NavLink>
+            <NavLink to='/emailLogin'>Sign In</NavLink>
           </span>
         </div>
       </form>

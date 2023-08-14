@@ -18,7 +18,7 @@ const LoginButton = () => {
   };
   return (
     <button className='login-btn' onClick={signInWithGoogle}>
-      Login width Google
+      LogIn with <span>Google</span>
     </button>
   );
 };

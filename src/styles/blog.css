@@ -32,6 +32,7 @@
 }
 
 .singleBlog-name {
+  text-align: center;
   font-size: 1.2rem;
   font-weight: 700;
   color: #0d1b2a;
@@ -52,7 +53,7 @@
 .singleBlog-category {
   font-size: 1rem;
   padding: 0.35rem 1.5rem;
-  background-color: #ffc300;
+  background-color: #000;
   color: #f9f7f3;
   border-radius: 0.5rem;
   font-weight: 900;
@@ -105,7 +106,8 @@
 /* Main Blog */
 
 .mainBlog {
-  margin: 1.75rem auto;
+  margin: 5rem auto;
+  margin-top: 8rem;
   width: 80%;
   height: auto;
   border: 1px solid black;

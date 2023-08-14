@@ -1,10 +1,27 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useReducer,
+} from 'react';
 const UserContextCreatePost = createContext();
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { deleteDoc, doc } from 'firebase/firestore';
 import { db, storage } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
+import reducer from '../utils/createPostReducer';
+import { getUserInput } from '../utils/firebaseFunction';
+
+const initialState = {
+  blogData: null,
+};
 
 const UserProviderCreatePost = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   const [list, setList] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [editingObj, setEditingObj] = useState(null);
@@ -13,21 +30,26 @@ const UserProviderCreatePost = ({ children }) => {
 
   const [newImage, setNewImage] = useState('');
 
-  const searchItem = (inputValue) => {
-    const searchInput = inputValue.toLowerCase();
+  const fetchData = async () => {
+    await getUserInput().then((data) => {
+      dispatch({ type: 'GET_DATA', blogData: data });
+    });
+  };
 
-    if (list.length) {
-      setSearchItems(
-        list.filter((item) => {
-          return item.category.toLowerCase().includes(searchInput);
-        })
-      );
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const searchItem = (e) => {
+    if (e !== '') {
+      dispatch({ type: 'FILTER', payload: { e: e } });
+    } else {
+      fetchData();
     }
-    setList(searchItems);
   };
 
   const showMainBlog = (id) => {
-    const getMainBlogObj = list.filter((item) => item.id === id);
+    const getMainBlogObj = state.blogData.find((item) => item.id === id);
     setMainBlogObj(getMainBlogObj);
   };
 
@@ -35,28 +57,19 @@ const UserProviderCreatePost = ({ children }) => {
     try {
       const itemToDeleteRef = doc(db, 'userInput', id);
       await deleteDoc(itemToDeleteRef);
+      fetchData();
 
-      const deletedArray = list.filter((item) => item.id !== id);
-      setList(deletedArray);
+      toast.success('Blog Deleted Successfully !');
     } catch (error) {
       console.log(error);
     }
   };
 
   const editItem = (id) => {
-    const filteredEditObj = list.filter((item) => item.id === id);
+    const filteredEditObj = state.blogData.find((item) => item.id === id);
     setIsEdit(true);
     setEditingObj(filteredEditObj);
   };
-
-  const userCollectionRef = collection(db, 'userInput');
-  useEffect(() => {
-    const getUserInput = async () => {
-      const data = await getDocs(userCollectionRef);
-      setList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getUserInput();
-  }, []);
 
   const uploadImage = (event) => {
     const imageFile = event.target.files[0];
@@ -69,23 +82,23 @@ const UserProviderCreatePost = ({ children }) => {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log('Upload is ' + progress + '% done');
         switch (snapshot.state) {
           case 'paused':
-            console.log('Upload is paused');
+            toast.info('Upload is Paused!');
             break;
           case 'running':
-            console.log('Upload is running');
+            toast.warning('Waiting for Image Upload!!');
             break;
         }
       },
       (error) => {
         console.log('Error', error);
+        toast.error('Error... Try Again!');
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL);
           setNewImage(downloadURL);
+          toast.success('Image Uploaded Successfully!');
         });
       }
     );
@@ -94,6 +107,8 @@ const UserProviderCreatePost = ({ children }) => {
   return (
     <UserContextCreatePost.Provider
       value={{
+        ...state,
+        dispatch,
         list,
         setList,
         deleteItem,

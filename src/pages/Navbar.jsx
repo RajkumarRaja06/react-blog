@@ -19,7 +19,9 @@ const Navbar = () => {
   return (
     <div>
       <nav className='navbar'>
-        <h3>Blog</h3>
+        <h3>
+          <Link to='/'>Raj_blog</Link>
+        </h3>
         <div className='navbar_addBtn'>
           <Link to='createPost'>
             <span>
@@ -27,7 +29,7 @@ const Navbar = () => {
             </span>
           </Link>
         </div>
-        <button onClick={signOutGoogle}>🙂Log out</button>
+        <button onClick={signOutGoogle}>🙂 Log out</button>
       </nav>
     </div>
   );

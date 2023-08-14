@@ -13,7 +13,6 @@ const HomeHeader = () => {
           </span>
           <h1>Blog</h1>
           <span>
-            {' '}
             <RiDoubleQuotesR />
           </span>
         </div>
