@@ -2,6 +2,8 @@ import { SingleBlog, HomeHeader } from '../components';
 import '../styles/home.css';
 import { UserConsumerCreatePost } from '../context/createPostContext';
 import { Footer } from '../components';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const Home = () => {
   const { blogData } = UserConsumerCreatePost();
@@ -17,6 +19,7 @@ const Home = () => {
           : null}
       </div>
       <Footer />
+      <ToastContainer />
     </div>
   );
 };
