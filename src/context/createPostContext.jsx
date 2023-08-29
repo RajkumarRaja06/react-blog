@@ -29,6 +29,9 @@ const UserProviderCreatePost = ({ children }) => {
   const [searchItems, setSearchItems] = useState([]);
 
   const [newImage, setNewImage] = useState('');
+  const [newName, setNewName] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+  const [newCategory, setNewCategory] = useState('');
 
   const fetchData = async () => {
     await getUserInput().then((data) => {
@@ -69,6 +72,9 @@ const UserProviderCreatePost = ({ children }) => {
     const filteredEditObj = state.blogData.find((item) => item.id === id);
     setIsEdit(true);
     setEditingObj(filteredEditObj);
+    setNewName(filteredEditObj.name);
+    setNewDescription(filteredEditObj.description);
+    setNewCategory(filteredEditObj.category);
   };
 
   const uploadImage = (event) => {
@@ -123,6 +129,12 @@ const UserProviderCreatePost = ({ children }) => {
         uploadImage,
         newImage,
         setNewImage,
+        newCategory,
+        setNewCategory,
+        newDescription,
+        setNewDescription,
+        newName,
+        setNewName,
       }}
     >
       {children}

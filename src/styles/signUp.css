@@ -1,12 +1,11 @@
 .contact {
-  height: 88.7vh;
+  min-height: 90vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  overflow: hidden;
-  padding: 0 1rem;
+  padding-top: 0rem;
   margin-top: 5rem;
   background-color: #020617;
 }
@@ -41,7 +40,7 @@
   justify-content: center;
   gap: 2rem;
   border: 1px solid #e0e0e0;
-  padding: 6rem 3rem 1rem;
+  padding: 2.2rem;
   background-color: #fff;
   border-radius: 0.75rem;
 }
@@ -108,10 +107,79 @@
   filter: brightness(55%);
 }
 
+.demoEmail {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #6d6a7c;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #020617;
+  color: #fff;
+}
+
+.trail-email {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.trail-email div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.trail-email div h4 {
+  color: #6d6a7c;
+}
+
+.trail-email div p {
+  font-weight: 600;
+}
+
+.demoEmail-title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
 @media screen and (max-width: 768px) {
   .contact-form {
     width: 25rem;
     padding: 1.5rem 1rem 0.5rem;
+  }
+  .demoEmail {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #6d6a7c;
+    gap: 1rem;
+    padding: 1.75rem;
+  }
+
+  .trail-email {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .trail-email div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .demoEmail-title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
   }
 }
 
@@ -128,6 +196,7 @@
   .connect {
     padding: 0.75rem;
     font-size: 0.75rem;
+    /* margin-top: 8rem; */
   }
   .btn-container {
     width: 100%;

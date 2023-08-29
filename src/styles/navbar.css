@@ -48,6 +48,23 @@
   color: #ea1d6f;
 }
 
+.login-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #fff;
+  border-radius: 0.25rem;
+}
+
+.login-info:hover {
+  background-color: #f6463d;
+  color: #fff;
+  border-color: #f6463d;
+}
+
 @media screen and (min-width: 768px) {
   .navbar {
     padding: 0 3.75rem;
@@ -58,5 +75,13 @@
   .navbar button {
     font-size: 1rem;
     border-radius: 1rem 4em;
+  }
+  .login-info {
+    font-size: 1.25rem;
+    font-weight: 800;
+    gap: 0.5rem;
+    padding: 0.5rem 0.95rem;
+    border: 2px solid #fff;
+    border-radius: 0.5rem;
   }
 }

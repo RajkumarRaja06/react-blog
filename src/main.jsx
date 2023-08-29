@@ -10,6 +10,8 @@ import Root from './pages/root';
 import EmailLogin from './pages/EmailLogin';
 import EmailSignin from './pages/EmailSignin';
 import { MainBlog } from './components';
+import Profile from './pages/Profile';
+import EditProfile from './pages/EditProfile';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: 'emailSignin',
         element: <EmailSignin />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
+      },
+      {
+        path: 'profile/editProfile',
+        element: <EditProfile />,
       },
     ],
   },

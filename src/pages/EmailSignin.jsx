@@ -56,7 +56,7 @@ const EmailSignin = () => {
 
         <div className='btn-container'>
           <button type='submit' className='btn connect'>
-            SignUp
+            Register
             <span className='connect-icon'>
               <AiOutlineSend />
             </span>
@@ -64,9 +64,9 @@ const EmailSignin = () => {
         </div>
 
         <div className='already-acc'>
-          Already have an account ?{'   '}
+          Have an account ?{'   '}
           <span className='already-acc-log'>
-            <NavLink to='/emailLogin'>Sign In</NavLink>
+            <NavLink to='/emailLogin'>Click here to Login</NavLink>
           </span>
         </div>
       </form>

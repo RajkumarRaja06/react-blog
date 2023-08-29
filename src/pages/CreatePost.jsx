@@ -19,11 +19,13 @@ const CreatePost = () => {
     newImage,
     setNewImage,
     dispatch,
+    newCategory,
+    setNewCategory,
+    newDescription,
+    setNewDescription,
+    newName,
+    setNewName,
   } = UserConsumerCreatePost();
-
-  const [newName, setNewName] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-  const [newCategory, setNewCategory] = useState('');
 
   function submitHandler() {
     setNewName('');

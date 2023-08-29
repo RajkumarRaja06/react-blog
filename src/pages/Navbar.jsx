@@ -1,21 +1,11 @@
 import '../styles/navbar.css';
-import { UserConsumer } from '../context/userContext';
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase';
-import { useNavigate } from 'react-router-dom';
 import { FaRegPlusSquare } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { CgProfile } from 'react-icons/cg';
+import { UserConsumer } from '../context/userContext';
 
 const Navbar = () => {
-  const { setUserLoginData } = UserConsumer();
-  const navigation = useNavigate();
-  const signOutGoogle = () => {
-    signOut(auth);
-    setUserLoginData(null);
-    localStorage.clear();
-    navigation('/');
-  };
-
+  const { userProfile } = UserConsumer();
   return (
     <div>
       <nav className='navbar'>
@@ -29,7 +19,13 @@ const Navbar = () => {
             </span>
           </Link>
         </div>
-        <button onClick={signOutGoogle}>🙂 Log out</button>
+
+        <Link className='login-info' to='profile' onClick={userProfile}>
+          <h5>Profile</h5>
+          <span>
+            <CgProfile />
+          </span>
+        </Link>
       </nav>
     </div>
   );

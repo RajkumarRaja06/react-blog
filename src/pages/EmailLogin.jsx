@@ -8,24 +8,29 @@ import { auth } from '../firebase';
 import { UserConsumer } from '../context/userContext';
 
 const EmailLogin = () => {
-  const { setUserLoginData } = UserConsumer();
+  const { setUserLoginData, setEmail, userLoginData } = UserConsumer();
   const navigate = useNavigate();
-  const [email, setEmail] = useState();
+  const [newEmail, setNewEmail] = useState();
   const [password, setPassword] = useState();
 
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    await signInWithEmailAndPassword(auth, email, password)
+    await signInWithEmailAndPassword(auth, newEmail, password)
       .then((userCredential) => {
         const user = userCredential.user;
 
         const { providerData } = user;
         localStorage.setItem('user', JSON.stringify(providerData[0]));
         setUserLoginData(JSON.parse(localStorage.getItem('user')));
+        localStorage.setItem(
+          'userEmailId',
+          JSON.stringify(providerData[0].email)
+        );
+        setEmail(JSON.parse(localStorage.getItem('userEmailId')));
         navigate('/');
 
-        setEmail('');
+        setNewEmail('');
         setPassword('');
       })
       .catch((err) => {
@@ -39,14 +44,27 @@ const EmailLogin = () => {
         <span className='title-subtitle'>Use Your Shop Account !</span>
       </div>
       <form className='contact-form' onSubmit={onSubmit}>
+        <div className='demoEmail'>
+          <p className='demoEmail-title'>Trial Use</p>
+          <div className='trail-email'>
+            <div>
+              <h4>Email :</h4>
+              <p>rajblog@gamil.com</p>
+            </div>
+            <div>
+              <h4>Password :</h4>
+              <p>Rajblog123#</p>
+            </div>
+          </div>
+        </div>
         <input
           type='email'
           name='email'
           placeholder='Enter a valid email address'
           className='contact-form-email'
           required
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          value={newEmail}
+          onChange={(event) => setNewEmail(event.target.value)}
         />
 
         <input
@@ -70,7 +88,7 @@ const EmailLogin = () => {
         <div className='already-acc'>
           Not account yet ?{'   '}
           <span className='already-acc-log'>
-            <NavLink to='/emailSignin'>Sign Up</NavLink>
+            <NavLink to='/emailSignin'>Click here to Register</NavLink>
           </span>
         </div>
       </form>

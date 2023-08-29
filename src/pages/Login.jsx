@@ -13,7 +13,7 @@ const LogIn = () => {
           we providing high quality online resources reding blogs. Just sign up
           and start reading some quality blogs.
         </p>
-        <Link to='emailSignin'>
+        <Link to='emailLogin'>
           <button className='login-btn'>
             SignIn with <span>Email</span>
           </button>
