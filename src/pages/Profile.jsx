@@ -161,7 +161,7 @@ const Profile = () => {
           </div>
         </div>
         <div className='profile-btnContainer'>
-          <Link to='editProfile'>
+          <Link to='/editProfile'>
             <button type='submit'>
               {!isEditing ? 'Add Profile' : 'Edit Profile'}
             </button>
