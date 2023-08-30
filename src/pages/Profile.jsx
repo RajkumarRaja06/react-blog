@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
+import { useEffect } from 'react';
 
 const Profile = () => {
   const {
@@ -18,7 +19,13 @@ const Profile = () => {
     number,
     isEditing,
     setUserLoginData,
+    userProfile,
+    profileData,
   } = UserConsumer();
+
+  useEffect(() => {
+    userProfile();
+  }, [profileData]);
 
   const navigate = useNavigate();
   const signOutGoogle = () => {

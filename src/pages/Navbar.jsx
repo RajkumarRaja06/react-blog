@@ -2,10 +2,8 @@ import '../styles/navbar.css';
 import { FaRegPlusSquare } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
-import { UserConsumer } from '../context/userContext';
 
 const Navbar = () => {
-  const { userProfile } = UserConsumer();
   return (
     <div>
       <nav className='navbar'>
@@ -20,7 +18,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <Link className='login-info' to='/profile' onClick={userProfile}>
+        <Link className='login-info' to='profile'>
           <h5>Profile</h5>
           <span>
             <CgProfile />

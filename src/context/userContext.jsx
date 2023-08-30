@@ -42,11 +42,6 @@ const UserProvider = ({ children }) => {
       ? localStorage.clear()
       : JSON.parse(localStorage.getItem('user'));
 
-  const userEmailInfo =
-    localStorage.getItem('userEmailId') === 'undefined'
-      ? localStorage.clear()
-      : JSON.parse(localStorage.getItem('userEmailId'));
-
   const getImageUrl = (event) => {
     const imageFile = event.target.files[0];
 
@@ -132,6 +127,7 @@ const UserProvider = ({ children }) => {
   };
 
   const contextValue = {
+    ...state,
     userLoginData,
     setUserLoginData,
     id,
@@ -162,7 +158,6 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     setUserLoginData(userInfo);
-    setEmail(userEmailInfo);
     fetchProfileData();
   }, []);
 

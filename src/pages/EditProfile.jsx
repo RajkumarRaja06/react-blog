@@ -7,9 +7,11 @@ import { db, auth } from '../firebase';
 import { setProfileData } from '../utils/firebaseFunction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 const EditProfile = () => {
   const {
+    profileData,
     setUserLoginData,
     id,
     name,
@@ -32,7 +34,12 @@ const EditProfile = () => {
     setIsEditing,
     profile,
     fetchProfileData,
+    userProfile,
   } = UserConsumer();
+
+  useEffect(() => {
+    userProfile();
+  }, [profileData]);
 
   const navigate = useNavigate();
 

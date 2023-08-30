@@ -1,6 +1,5 @@
 import '../styles/signUp.css';
 import { AiOutlineSend } from 'react-icons/ai';
-
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -8,7 +7,7 @@ import { auth } from '../firebase';
 import { UserConsumer } from '../context/userContext';
 
 const EmailLogin = () => {
-  const { setUserLoginData, setEmail, userLoginData } = UserConsumer();
+  const { setUserLoginData } = UserConsumer();
   const navigate = useNavigate();
   const [newEmail, setNewEmail] = useState();
   const [password, setPassword] = useState();
@@ -23,11 +22,6 @@ const EmailLogin = () => {
         const { providerData } = user;
         localStorage.setItem('user', JSON.stringify(providerData[0]));
         setUserLoginData(JSON.parse(localStorage.getItem('user')));
-        localStorage.setItem(
-          'userEmailId',
-          JSON.stringify(providerData[0].email)
-        );
-        setEmail(JSON.parse(localStorage.getItem('userEmailId')));
         navigate('/');
 
         setNewEmail('');
@@ -37,6 +31,7 @@ const EmailLogin = () => {
         console.log('Err', err.message);
       });
   };
+
   return (
     <div className='contact' id='contact'>
       <div className='title-container'>
