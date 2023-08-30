@@ -108,6 +108,14 @@ const UserProvider = ({ children }) => {
     );
     if (filterUser === 'undefined') {
       setIsEditing(false);
+
+      setName('nill');
+      setSelectCity('nill');
+      setNewState('nill');
+      setAddress('nill');
+      setGender('nill');
+      setImage('nill');
+      setNumber('nill');
     } else {
       setIsEditing(true);
       setProfile(filterUser.id);
