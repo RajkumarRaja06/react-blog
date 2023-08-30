@@ -20,7 +20,7 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <Link className='login-info' to='profile' onClick={userProfile}>
+        <Link className='login-info' to='/profile' onClick={userProfile}>
           <h5>Profile</h5>
           <span>
             <CgProfile />
