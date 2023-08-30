@@ -101,28 +101,30 @@ const UserProvider = ({ children }) => {
     const filterUser = state.profileData.find(
       (item) => item.email === userInfo.email
     );
-    if (filterUser === 'undefined') {
-      setIsEditing(false);
+    if (filterUser) {
+      if (filterUser === 'undefined') {
+        setIsEditing(false);
 
-      setName('nill');
-      setSelectCity('nill');
-      setNewState('nill');
-      setAddress('nill');
-      setGender('nill');
-      setImage('nill');
-      setNumber('nill');
-    } else {
-      setIsEditing(true);
-      setProfile(filterUser.id);
-      setId(filterUser.id);
-      setEmail(filterUser.email);
-      setName(filterUser.name);
-      setSelectCity(filterUser.selectCity);
-      setNewState(filterUser.newState);
-      setAddress(filterUser.address);
-      setGender(filterUser.gender);
-      setImage(filterUser.image);
-      setNumber(filterUser.number);
+        setName('nill');
+        setSelectCity('nill');
+        setNewState('nill');
+        setAddress('nill');
+        setGender('nill');
+        setImage('nill');
+        setNumber('nill');
+      } else {
+        setIsEditing(true);
+        setProfile(filterUser.id);
+        setId(filterUser.id);
+        setEmail(filterUser.email);
+        setName(filterUser.name);
+        setSelectCity(filterUser.selectCity);
+        setNewState(filterUser.newState);
+        setAddress(filterUser.address);
+        setGender(filterUser.gender);
+        setImage(filterUser.image);
+        setNumber(filterUser.number);
+      }
     }
   };
 
