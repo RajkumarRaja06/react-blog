@@ -156,7 +156,7 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     let subscriber = onAuthStateChanged(auth, (user) => {
-      // console.log(auth.currentUser); //returns null now
+      console.log(auth.currentUser); //returns null now
       if (user) {
         setUserLoginData(user.providerData[0]);
         setEmail(user.providerData[0].email);
