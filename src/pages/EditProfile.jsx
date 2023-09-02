@@ -39,7 +39,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     userProfile();
-  }, [profileData]);
+  }, []);
 
   const navigate = useNavigate();
 
