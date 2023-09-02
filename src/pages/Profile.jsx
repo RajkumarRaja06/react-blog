@@ -28,10 +28,10 @@ const Profile = () => {
   }, [profileData]);
 
   const navigate = useNavigate();
+
   const signOutGoogle = () => {
     signOut(auth);
     setUserLoginData(null);
-    localStorage.clear();
     navigate('/');
   };
 
@@ -50,7 +50,14 @@ const Profile = () => {
         <div className='profile-row-readonly'>
           <div className='profile-id'>
             <label htmlFor='id'>ID</label>
-            <input type='text' value={id} name='id' id='id' readOnly />
+            <input
+              type='text'
+              value={id}
+              name='id'
+              id='id'
+              placeholder='Auto Generate'
+              readOnly
+            />
           </div>
           <div className='profile-name'>
             <label htmlFor='name'>User Name</label>

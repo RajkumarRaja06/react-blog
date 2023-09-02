@@ -21,16 +21,17 @@ const EmailSignin = () => {
         navigate('/emailLogin');
       })
       .catch((err) => {
-        if (err.code === 'auth/email-already-in-use') {
-          alert('Email already exist');
-          navigate('/emailLogin');
+        if (err.code === `auth/email-already-in-use`) {
+          alert(`Email already exists`);
+        } else {
+          console.log(`Error Occurred while registering`, err.message);
         }
       });
   };
   return (
     <div className='contact'>
       <div className='title-container'>
-        <h2 className='title-name'>Sign In</h2>
+        <h2 className='title-name'>Sign Up</h2>
         <span className='title-subtitle'>Create a Blog Account !</span>
       </div>
       <form className='contact-form' onSubmit={onSubmit}>

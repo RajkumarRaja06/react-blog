@@ -91,13 +91,12 @@ const EditProfile = () => {
           emptyValue();
           navigate('/');
           fetchProfileData();
-          toast.success('Successfully Update Profile');
+          toast.success('Profile Update Successfully');
         }
       } else {
         toast.warning('Enter a valid number!');
       }
     } else {
-      // alert('Input Field Is Mandatory');
       toast.error('Input Field Is Mandatory!');
     }
   };
@@ -113,7 +112,14 @@ const EditProfile = () => {
         <div className='profile-row'>
           <div className='profile-id'>
             <label htmlFor='id'>ID</label>
-            <input type='text' value={id} name='id' id='id' readOnly />
+            <input
+              type='text'
+              value={id}
+              name='id'
+              id='id'
+              placeholder='Auto Generate'
+              readOnly
+            />
           </div>
           <div className='profile-name'>
             <label htmlFor='name'>User Name</label>

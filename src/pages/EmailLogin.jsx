@@ -4,10 +4,8 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
-import { UserConsumer } from '../context/userContext';
 
 const EmailLogin = () => {
-  const { setUserLoginData } = UserConsumer();
   const navigate = useNavigate();
   const [newEmail, setNewEmail] = useState();
   const [password, setPassword] = useState();
@@ -18,16 +16,14 @@ const EmailLogin = () => {
     await signInWithEmailAndPassword(auth, newEmail, password)
       .then((userCredential) => {
         const user = userCredential.user;
-
-        const { providerData } = user;
-        localStorage.setItem('user', JSON.stringify(providerData[0]));
-        setUserLoginData(JSON.parse(localStorage.getItem('user')));
         navigate('/');
-
         setNewEmail('');
         setPassword('');
       })
       .catch((err) => {
+        if (err.code === 'auth/wrong-password') {
+          alert('Password is wrong');
+        }
         console.log('Err', err.message);
       });
   };

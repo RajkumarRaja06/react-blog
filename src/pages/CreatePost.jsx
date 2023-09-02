@@ -73,7 +73,7 @@ const CreatePost = () => {
           console.log(error);
         }
         navigate('/');
-        toast.success('Successfully Blog Updated!');
+        toast.success('Blog Added Successfully!');
       } else {
         try {
           const itemToEditRef = doc(db, 'userInput', editingObj.id);
@@ -91,7 +91,7 @@ const CreatePost = () => {
         setIsEdit(false);
         setEditingObj(null);
         navigate('/');
-        toast.success('Successfully Blog Added!');
+        toast.success('Blog Updated Successfully!');
       }
     } else {
       alert('Input Field Is Mandatory');

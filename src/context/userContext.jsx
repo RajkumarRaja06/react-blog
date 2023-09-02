@@ -6,9 +6,9 @@ import {
   useReducer,
 } from 'react';
 
-import { storage } from '../firebase';
+import { storage, auth } from '../firebase';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-
+import { onAuthStateChanged } from 'firebase/auth';
 import profileReducer from '../utils/profileReducer';
 import { getProfileData } from '../utils/firebaseFunction';
 import { toast } from 'react-toastify';
@@ -36,11 +36,6 @@ const UserProvider = ({ children }) => {
   const [image, setImage] = useState('');
 
   const [profile, setProfile] = useState(null);
-
-  const userInfo =
-    localStorage.getItem('user') === 'undefined'
-      ? localStorage.clear()
-      : JSON.parse(localStorage.getItem('user'));
 
   const getImageUrl = (event) => {
     const imageFile = event.target.files[0];
@@ -97,10 +92,7 @@ const UserProvider = ({ children }) => {
   };
 
   const userProfile = () => {
-    setEmail(userInfo.email);
-    const filterUser = state.profileData.find(
-      (item) => item.email === userInfo.email
-    );
+    const filterUser = state.profileData.find((item) => item.email === email);
     if (filterUser) {
       if (filterUser === 'undefined') {
         setIsEditing(false);
@@ -159,9 +151,20 @@ const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setUserLoginData(userInfo);
     fetchProfileData();
   }, []);
+
+  useEffect(() => {
+    let subscriber = onAuthStateChanged(auth, (user) => {
+      // console.log(auth.currentUser); //returns null now
+      if (user) {
+        setUserLoginData(user.providerData[0]);
+        setEmail(user.providerData[0].email);
+      }
+    });
+
+    return subscriber;
+  }, [state.profileData]);
 
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
