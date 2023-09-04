@@ -36,7 +36,7 @@ const EmailLogin = () => {
       </div>
       <form className='contact-form' onSubmit={onSubmit}>
         <div className='demoEmail'>
-          <p className='demoEmail-title'>Trial Use</p>
+          <p className='demoEmail-title'>Test Credentials</p>
           <div className='trail-email'>
             <div>
               <h4>Email :</h4>
